@@ -1,11 +1,11 @@
 -- settings (so u dont have to scroll)
 local settings = {
-    folder_name = "zephyrus"; -- stupid shit
+    folder_name = "kultvip"; -- stupid shit
     default_accent = Color3.fromRGB(61, 100, 227); -- also stupid shit
 };
 
-local drawing = loadstring(game:HttpGet("https://github.com/GhostDuckyy/UI-Libraries/blob/main/DEADCELL%20REMAKE/misc/extension.lua?raw=true"))();
-local tween = loadstring(game:HttpGet("https://pastebin.com/raw/TSeh4jpM"))()
+local drawing = loadstring(game:HttpGet("https://raw.githubusercontent.com/f1nobe7650/other/main/plugins/drawing%20extension"))();
+local tween = loadstring(game:HttpGet("https://raw.githubusercontent.com/f1nobe7650/other/main/VozoidsTween"))()
 local bxor = loadstring(game:HttpGet('https://github.com/GhostDuckyy/GhostDuckyy/blob/main/Tool/bxor.lua?raw=true'))()
 
 -- // UI LIBRARY
