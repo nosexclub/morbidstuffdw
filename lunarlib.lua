@@ -187,7 +187,7 @@ local Library = {
 		[Enum.UserInputType.MouseButton3] = "MB3"
 	};
 	Connections = {};
-	Font = Enum.Font.Ubuntu;
+	Font = Enum.Code;
 	FontSize = 14;
 	Notifs = {};
 	KeyList = nil;
