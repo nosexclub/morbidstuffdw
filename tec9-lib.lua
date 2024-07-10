@@ -5,7 +5,7 @@ local Library = {
 		main = "test";
 		configs = "test/Configs";
 	};
-	Accent = Color3.fromRGB(105, 85, 170);
+	Accent = Color3.fromRGB(191, 191, 230);
 	Pages = {};
 	Sections = {};
 	Flags = {};
