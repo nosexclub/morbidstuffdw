@@ -187,8 +187,8 @@ local Library = {
 		[Enum.UserInputType.MouseButton3] = "MB3"
 	};
 	Connections = {};
-	Font = Enum.Font.Code;
-	FontSize = 14;
+	Font = Font.new("rbxassetid://12187371840");
+	FontSize = 9;
 	Notifs = {};
 	KeyList = nil;
 	UIKey = Enum.KeyCode.End;
@@ -196,14 +196,9 @@ local Library = {
 }
 
 local InputService = game:GetService("UserInputService");
-local TeleportService = game:GetService("TeleportService");
 local RunService = game:GetService("RunService");
-local Workspace = game:GetService("Workspace");
-local Lighting = game:GetService("Lighting");
-local Players = game:GetService("Players");
 local HttpService = game:GetService("HttpService");
-local StarterGui = game:GetService("StarterGui");
-local ReplicatedStorage = game:GetService("ReplicatedStorage");
+local StarterGui = game:GetService("StarterGui");;
 local TweenService = game:GetService("TweenService");
 local VirtualUser = game:GetService("VirtualUser");
 local PathFindingService = game:GetService("PathfindingService");
@@ -233,10 +228,10 @@ local Visuals = {
 		    Color = Color3.fromRGB(0, 255, 0)
 	    },
 		["Text"] = {
-			Size = 13,
+			Size = 9,
 			Center = true,
 			Outline = true,
-			Font = Drawing.Fonts.Plex,
+			FontFace = Drawing.Fonts.Plex,
 			Color = Color3.fromRGB(255, 255, 255)
 		},
 		["Square"] = {
@@ -256,19 +251,11 @@ local Visuals = {
 		}
 	},
 }
-local NovaPart = game:GetObjects("rbxassetid://14745759584")[1]; NovaPart.Parent = ReplicatedStorage;
-local Nova = NovaPart.Attachment;
-local Sparkles = game:GetObjects("rbxassetid://16883621036")[1]; Sparkles.Parent = ReplicatedStorage;
-local SparklesEffect = Sparkles.LevelParticle;
-local sfx = {["Bameware"] = "16910460773",["Skeet"] = "4753603610",["Bonk"] = "3765689841",["Lazer Beam"] = "130791043",["Windows XP Error"] = "160715357",["TF2 Hitsound"] = "3455144981",["TF2 Critical"] = "296102734",["TF2 Bat"] = "3333907347",['Bow Hit'] = "1053296915",['Bow'] = "3442683707",['OSU'] = "7147454322",['Minecraft Hit'] = "4018616850",['Steve'] = "5869422451",['1nn'] = "7349055654",['Rust'] = "3744371091",["TF2 Pan"] = "3431749479",["Neverlose"] = "8679627751",["Mario"] = "5709456554",};
-local sfx_names = {"Bameware", "Skeet", "Bonk", "Lazer Beam", "Windows XP Error", "TF2 Hitsound", "TF2 Critical", "TF2 Bat", "Bow Hit", "Bow", "OSU", "Minecraft Hit", "Steve", "1nn", "Rust", "TF2 Pan", "Neverlose", "Mario"};
 local LocalPlayer = Players.LocalPlayer; 
 local Mouse = LocalPlayer:GetMouse();
 local Camera = Workspace.Camera;
 local viewportSize = game.Workspace.Camera.ViewportSize;
-local hitmodule = game:GetObjects("rbxassetid://7255773215")[1]; hitmodule.Parent = ReplicatedStorage;
 local Offset = game:GetService("GuiService"):GetGuiInset().Y;
-local Math = loadstring(game:HttpGet("https://raw.githubusercontent.com/f1nobe7650/Lynx/main/Math.lua"))(); 
 local NotifiactionSGui = Instance.new("ScreenGui", game.CoreGui); NotifiactionSGui.Enabled = true
 local NewVector2 = Vector2.new;
 local NewVector3 = Vector3.new;
@@ -286,14 +273,7 @@ local Clamp = math.clamp;
 local Ceil = math.ceil; 
 local Pi = math.pi;
 local Sqrt = math.sqrt;
-local Lighting_Save = {["ColorShift_Bottom"] = Lighting.ColorShift_Bottom, ["Ambient"]=Lighting.Ambient, ["OutdoorAmbient"]=Lighting.OutdoorAmbient, ["ColorShift_Top"]=Lighting.ColorShift_Top, ["FogColor"]=Lighting.FogColor, ["FogEnd"]=Lighting.FogEnd, ["FogStart"]=Lighting.FogStart, ["ClockTime"]=Lighting.ClockTime, ["Brightness"]=Lighting.Brightness}
-local bodyClone = game:GetObjects("rbxassetid://8246626421")[1]; bodyClone.Humanoid:Destroy(); bodyClone.Head.Face:Destroy(); bodyClone.Parent = game.Workspace; bodyClone.HumanoidRootPart.Velocity = Vector3.new(); bodyClone.HumanoidRootPart.CFrame = NewCFrame(9999,9999,9999); bodyClone.HumanoidRootPart.Transparency = 1; bodyClone.HumanoidRootPart.CanCollide = false 
-local visualizeChams = Instance.new("Highlight"); visualizeChams.Enabled = true; visualizeChams.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop; visualizeChams.FillColor = Color3.fromRGB(102, 60, 153); visualizeChams.OutlineColor =  Color3.fromRGB(0, 0, 0); visualizeChams.Adornee = bodyClone; visualizeChams.OutlineTransparency = 0.2; visualizeChams.FillTransparency = 0.5; visualizeChams.Parent = game.CoreGui
-local targetHighlight = Instance.new("Highlight", game.CoreGui); targetHighlight.Enabled = true; targetHighlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop; targetHighlight.FillColor = Color3.fromRGB(0,0,0); targetHighlight.OutlineColor = Color3.fromRGB(255,255,255); targetHighlight.OutlineTransparency = 0.5; targetHighlight.FillTransparency = 0;
-local IgnoreList = {};
 local Tween = {};
-local crosshair_Lines = {}; 
-local crosshair_Outlines = {}; 
 local C_Desync = {Enabled = false, OldPosition = nil, PredictedPosition = nil};
 local connections = {};
 local highlights = {};
@@ -314,26 +294,6 @@ local crosshair_tick = 0;
 local buying = false; 
 local PlaceHolderUI = Instance.new("ScreenGui", game.CoreGui);
 PlaceHolderUI.Enabled = false
-local Path = 
-	"https://raw.githubusercontent.com/fortniteisveryepic/assets/main/"
-local images = {
-	["[AK47]"] = game:HttpGet(Path.. "ak.png"),
-	["[AR]"] = game:HttpGet(Path.. "ar.png"),
-	["[AUG]"] = game:HttpGet(Path.. "aug.png"),
-	["[Double-Barrel SG]"] = game:HttpGet(Path.. "db.png"),
-	["[DrumGun]"] = game:HttpGet(Path.. "drumgun.png"),
-	["[Flamethrower]"] = game:HttpGet(Path.. "flame.png"),
-	["[Glock]"] = game:HttpGet(Path.. "glock.png"),
-	["[LMG]"] = game:HttpGet(Path.. "lmg.png"),
-	["[P90]"]= game:HttpGet(Path.. "p90.png"),
-	["[Revolver]"] = game:HttpGet(Path.. "rev.png"),
-	["[SMG]"] = game:HttpGet(Path.. "smg.png"),
-	["[Shotgun]"] = game:HttpGet(Path.. "shotgun.png"),
-	["[SilencerAR]"] = game:HttpGet(Path.. "ar.png"),
-	["[TacticalShotgun]"] = game:HttpGet(Path.. "tac.png"),
-	["[Knife]"] = game:HttpGet(Path.. "knife.png"),
-	["[Rifle]"] = game:HttpGet(Path.. "rifle.png")
-} 
 local Languages = {
     A = {English = "A", Arabic = "أ", Albanian = "A", Japanese = "あ", Spanish = "A", Russian = "А", Chinese = "阿", Urdu = "ا", French = "A", Portuguese = "A", Hindi = "अ"},
     B = {English = "B", Arabic = "ب", Albanian = "B", Japanese = "い", Spanish = "B", Russian = "Б", Chinese = "波", Urdu = "ب", French = "B", Portuguese = "B", Hindi = "ब"},
@@ -366,8 +326,6 @@ local utx = {}
 local Messages = {}
 local drawingCache = {} 
 
-utility.folders["Part Chams"] = Instance.new("Folder", Workspace);
-utility.folders["Hit Chams"] = Instance.new("Folder", Workspace);
 Library.__index = Library;
 Library.Pages.__index = Library.Pages;
 Library.Sections.__index = Library.Sections;
@@ -434,7 +392,7 @@ Library.Sections.__index = Library.Sections;
 			TextLabel.BorderColor3 = Color3.new(0,0,0)
 			TextLabel.Text = message
 			TextLabel.TextColor3 = Color3.new(0.9216,0.9216,0.9216)
-			TextLabel.Font = Enum.Font.Code
+			TextLabel.FontFace = Font.new("rbxassetid://12187371840")
 			TextLabel.TextSize = Library.FontSize
 			TextLabel.AutomaticSize = Enum.AutomaticSize.X
 			TextLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -698,7 +656,7 @@ Library.Sections.__index = Library.Sections;
 			KeyTitle.BorderColor3 = Color3.new(0,0,0)
 			KeyTitle.Text = "Keybinds"
 			KeyTitle.TextColor3 = Color3.new(1,1,1)
-			KeyTitle.Font = Enum.Font.Code
+			KeyTitle.FontFace = Font.new("rbxassetid://12187371840")
 			KeyTitle.TextSize = 12
 			KeyTitle.TextStrokeTransparency = 0
 			--
@@ -726,7 +684,7 @@ Library.Sections.__index = Library.Sections;
 				NewValue.BorderColor3 = Color3.new(0,0,0)
 				NewValue.Text = tostring(" ["..Key.."] " .. Name .. " (" .. Mode ..") ")
 				NewValue.TextColor3 = Color3.new(1,1,1)
-				NewValue.Font = Enum.Font.Code
+				NewValue.FontFace = Font.new("rbxassetid://12187371840")
 				NewValue.TextSize = 12
 				NewValue.AutomaticSize = Enum.AutomaticSize.X
 				NewValue.TextXAlignment = Enum.TextXAlignment.Left
@@ -812,7 +770,7 @@ Library.Sections.__index = Library.Sections;
 			Color.Text = ""
 			Color.TextColor3 = Color3.new(0,0,0)
 			Color.AutoButtonColor = false
-			Color.Font = Enum.Font.Code
+			Color.FontFace = Font.new("rbxassetid://12187371840")
 			Color.TextSize = 14
 			Color.ZIndex = 100
 			--
@@ -940,7 +898,7 @@ Library.Sections.__index = Library.Sections;
 			Hold.Text = "Copy"
 			Hold.TextColor3 = Color3.fromRGB(145,145,145)
 			Hold.AutoButtonColor = false
-			Hold.Font = Enum.Font.Code
+			Hold.FontFace = Font.new("rbxassetid://12187371840")
 			Hold.TextSize = Library.FontSize
 			Hold.TextStrokeTransparency = 0
 			Hold.ZIndex = 100
@@ -954,7 +912,7 @@ Library.Sections.__index = Library.Sections;
 			Toggle.Text = "Paste"
 			Toggle.TextColor3 = Color3.fromRGB(145,145,145)
 			Toggle.AutoButtonColor = false
-			Toggle.Font = Enum.Font.Code
+			Toggle.FontFace = Font.new("rbxassetid://12187371840")
 			Toggle.TextSize = Library.FontSize
 			Toggle.TextStrokeTransparency = 0
 			Toggle.ZIndex = 100
@@ -1247,7 +1205,7 @@ Library.Sections.__index = Library.Sections;
 			DragButton.Text = ""
 			DragButton.TextColor3 = Color3.new(0,0,0)
 			DragButton.AutoButtonColor = false
-			DragButton.Font = Enum.Font.Code
+			DragButton.FontFace = Font.new("rbxassetid://12187371840")
 			DragButton.TextSize = 14
 			
             
@@ -1364,7 +1322,7 @@ Library.Sections.__index = Library.Sections;
 			TabButton.Text = Page.Name
 			TabButton.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
 			TabButton.AutoButtonColor = false
-			TabButton.Font = Enum.Font.Code
+			TabButton.FontFace = Font.new("rbxassetid://12187371840")
 			TabButton.TextSize = Library.FontSize
 			TabButton.TextStrokeTransparency = 0
 			TabButton.LineHeight = 1.1
@@ -1631,7 +1589,7 @@ Library.Sections.__index = Library.Sections;
 			Title.BorderSizePixel = 0
 			Title.BorderColor3 = Color3.new(0,0,0)
 			Title.TextColor3 = Color3.new(1,1,1)
-			Title.Font = Enum.Font.Code
+			Title.FontFace = Font.new("rbxassetid://12187371840")
 			Title.TextSize = Library.FontSize
 			Title.ZIndex = 3
 			Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -1713,7 +1671,7 @@ Library.Sections.__index = Library.Sections;
 			NewToggle.Text = ""
 			NewToggle.TextColor3 = Color3.new(0,0,0)
 			NewToggle.AutoButtonColor = false
-			NewToggle.Font = Enum.Font.Code
+			NewToggle.FontFace = Font.new("rbxassetid://12187371840")
 			NewToggle.TextSize = 14
 			--
 			Outline.Name = "Outline"
@@ -1740,7 +1698,7 @@ Library.Sections.__index = Library.Sections;
 			Title.BorderSizePixel = 0
 			Title.BorderColor3 = Color3.new(0,0,0)
 			Title.TextColor3 = Toggle.Risk and Color3.fromRGB(158, 158, 24) or Color3.new(0.5686,0.5686,0.5686)
-			Title.Font = Enum.Font.Code
+			Title.FontFace = Font.new("rbxassetid://12187371840")
 			Title.TextSize = Library.FontSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 			Title.Text = Toggle.Name
@@ -1860,7 +1818,7 @@ Library.Sections.__index = Library.Sections;
 				Value.BorderColor3 = Color3.new(0,0,0)
 				Value.Text = "MB2"
 				Value.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-				Value.Font = Enum.Font.Code
+				Value.FontFace = Font.new("rbxassetid://12187371840")
 				Value.TextSize = Library.FontSize
 				Value.TextStrokeTransparency = 0
 				--
@@ -1891,7 +1849,7 @@ Library.Sections.__index = Library.Sections;
 				Hold.Text = "Hold"
 				Hold.TextColor3 = Keybind.Mode == "Hold" and Color3.new(1,1,1) or Color3.new(0.5686,0.5686,0.5686)
 				Hold.AutoButtonColor = false
-				Hold.Font = Enum.Font.Code
+				Hold.FontFace = Font.new("rbxassetid://12187371840")
 				Hold.TextSize = Library.FontSize
 				Hold.TextStrokeTransparency = 0
 				--
@@ -1904,7 +1862,7 @@ Library.Sections.__index = Library.Sections;
 				Toggle.Text = "Toggle"
 				Toggle.TextColor3 = Keybind.Mode == "Toggle" and Color3.new(1,1,1) or Color3.new(0.5686,0.5686,0.5686)
 				Toggle.AutoButtonColor = false
-				Toggle.Font = Enum.Font.Code
+				Toggle.FontFace = Font.new("rbxassetid://12187371840")
 				Toggle.TextSize = Library.FontSize
 				Toggle.TextStrokeTransparency = 0
 				--
@@ -1917,7 +1875,7 @@ Library.Sections.__index = Library.Sections;
 				Always.Text = "Always"
 				Always.TextColor3 = Keybind.Mode == "Always" and Color3.new(1,1,1) or Color3.new(0.5686,0.5686,0.5686)
 				Always.AutoButtonColor = false
-				Always.Font = Enum.Font.Code
+				Always.FontFace = Font.new("rbxassetid://12187371840")
 				Always.TextSize = Library.FontSize
 				Always.TextStrokeTransparency = 0
 
@@ -2238,7 +2196,7 @@ Library.Sections.__index = Library.Sections;
 			NewSlider.Text = ""
 			NewSlider.TextColor3 = Color3.new(0,0,0)
 			NewSlider.AutoButtonColor = false
-			NewSlider.Font = Enum.Font.Code
+			NewSlider.FontFace = Font.new("rbxassetid://12187371840")
 			NewSlider.TextSize = 14
 			--
 			Outline.Name = "Outline"
@@ -2263,7 +2221,7 @@ Library.Sections.__index = Library.Sections;
 			Accent.Text = ""
 			Accent.TextColor3 = Color3.new(0,0,0)
 			Accent.AutoButtonColor = false
-			Accent.Font = Enum.Font.Code
+			Accent.FontFace = Font.new("rbxassetid://12187371840")
 			Accent.TextSize = 14
 			table.insert(Library.ThemeObjects, Accent)
 			table.insert(Library.ThemeObjects, Accent)
@@ -2279,7 +2237,7 @@ Library.Sections.__index = Library.Sections;
 			Add.Text = "+"
 			Add.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
 			Add.AutoButtonColor = false
-			Add.Font = Enum.Font.Code
+			Add.FontFace = Font.new("rbxassetid://12187371840")
 			Add.TextSize = Library.FontSize
 			Add.TextStrokeTransparency = 0
 			--
@@ -2294,7 +2252,7 @@ Library.Sections.__index = Library.Sections;
 			Subtract.Text = "-"
 			Subtract.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
 			Subtract.AutoButtonColor = false
-			Subtract.Font = Enum.Font.Code
+			Subtract.FontFace = Font.new("rbxassetid://12187371840")
 			Subtract.TextSize = Library.FontSize
 			Subtract.TextStrokeTransparency = 0
 			--
@@ -2306,7 +2264,7 @@ Library.Sections.__index = Library.Sections;
 			Title.BorderSizePixel = 0
 			Title.BorderColor3 = Color3.new(0,0,0)
 			Title.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-			Title.Font = Enum.Font.Code
+			Title.FontFace = Font.new("rbxassetid://12187371840")
 			Title.TextSize = Library.FontSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 			Title.Text = Slider.Name
@@ -2320,7 +2278,7 @@ Library.Sections.__index = Library.Sections;
 			Value.BorderSizePixel = 0
 			Value.BorderColor3 = Color3.new(0,0,0)
 			Value.TextColor3 = Color3.new(1,1,1)
-			Value.Font = Enum.Font.Code
+			Value.FontFace = Font.new("rbxassetid://12187371840")
 			Value.TextSize = Library.FontSize
 			Value.TextXAlignment = Enum.TextXAlignment.Right
 			Value.TextStrokeTransparency = 0
@@ -2495,7 +2453,7 @@ Library.Sections.__index = Library.Sections;
 			Value.BorderSizePixel = 0
 			Value.BorderColor3 = Color3.new(0,0,0)
 			Value.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-			Value.Font = Enum.Font.Code
+			Value.FontFace = Font.new("rbxassetid://12187371840")
 			Value.TextSize = Library.FontSize
 			Value.TextXAlignment = Enum.TextXAlignment.Left
 			Value.TextStrokeTransparency = 0
@@ -2510,7 +2468,7 @@ Library.Sections.__index = Library.Sections;
 			Icon.BorderColor3 = Color3.new(0,0,0)
 			Icon.Text = "+"
 			Icon.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-			Icon.Font = Enum.Font.Code
+			Icon.FontFace = Font.new("rbxassetid://12187371840")
 			Icon.TextSize = Library.FontSize
 			Icon.TextXAlignment = Enum.TextXAlignment.Right
 			Icon.TextStrokeTransparency = 0
@@ -2523,7 +2481,7 @@ Library.Sections.__index = Library.Sections;
 			Title.BorderSizePixel = 0
 			Title.BorderColor3 = Color3.new(0,0,0)
 			Title.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-			Title.Font = Enum.Font.Code
+			Title.FontFace = Font.new("rbxassetid://12187371840")
 			Title.TextSize = Library.FontSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 			Title.TextStrokeTransparency = 0
@@ -2652,7 +2610,7 @@ Library.Sections.__index = Library.Sections;
 					NewOption.Text = ""
 					NewOption.TextColor3 = Color3.new(0,0,0)
 					NewOption.AutoButtonColor = false
-					NewOption.Font = Enum.Font.Code
+					NewOption.FontFace = Font.new("rbxassetid://12187371840")
 					NewOption.TextSize = 14
 					NewOption.ZIndex = 7;
 					Dropdown.OptionInsts[option].button = NewOption
@@ -2666,7 +2624,7 @@ Library.Sections.__index = Library.Sections;
 					OptionName.BorderColor3 = Color3.new(0,0,0)
 					OptionName.Text = option
 					OptionName.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-					OptionName.Font = Enum.Font.Code
+					OptionName.FontFace = Font.new("rbxassetid://12187371840")
 					OptionName.TextSize = Library.FontSize
 					OptionName.TextXAlignment = Enum.TextXAlignment.Left
 					OptionName.TextStrokeTransparency = 0
@@ -2848,7 +2806,7 @@ Library.Sections.__index = Library.Sections;
 			Value.BorderColor3 = Color3.new(0,0,0)
 			Value.Text = "MB2"
 			Value.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-			Value.Font = Enum.Font.Code
+			Value.FontFace = Font.new("rbxassetid://12187371840")
 			Value.TextSize = Library.FontSize
 			Value.TextStrokeTransparency = 0
 			--
@@ -2860,7 +2818,7 @@ Library.Sections.__index = Library.Sections;
 			Title.BorderSizePixel = 0
 			Title.BorderColor3 = Color3.new(0,0,0)
 			Title.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-			Title.Font = Enum.Font.Code
+			Title.FontFace = Font.new("rbxassetid://12187371840")
 			Title.TextSize = Library.FontSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 			Title.Text = Keybind.Name
@@ -2893,7 +2851,7 @@ Library.Sections.__index = Library.Sections;
 			Hold.Text = "Hold"
 			Hold.TextColor3 = Keybind.Mode == "Hold" and Color3.new(1,1,1) or Color3.new(0.5686,0.5686,0.5686)
 			Hold.AutoButtonColor = false
-			Hold.Font = Enum.Font.Code
+			Hold.FontFace = Font.new("rbxassetid://12187371840")
 			Hold.TextSize = Library.FontSize
 			Hold.TextStrokeTransparency = 0
 			--
@@ -2906,7 +2864,7 @@ Library.Sections.__index = Library.Sections;
 			Toggle.Text = "Toggle"
 			Toggle.TextColor3 = Keybind.Mode == "Toggle" and Color3.new(1,1,1) or Color3.new(0.5686,0.5686,0.5686)
 			Toggle.AutoButtonColor = false
-			Toggle.Font = Enum.Font.Code
+			Toggle.FontFace = Font.new("rbxassetid://12187371840")
 			Toggle.TextSize = Library.FontSize
 			Toggle.TextStrokeTransparency = 0
 			--
@@ -2919,7 +2877,7 @@ Library.Sections.__index = Library.Sections;
 			Always.Text = "Always"
 			Always.TextColor3 = Keybind.Mode == "Always" and Color3.new(1,1,1) or Color3.new(0.5686,0.5686,0.5686)
 			Always.AutoButtonColor = false
-			Always.Font = Enum.Font.Code
+			Always.FontFace = Font.new("rbxassetid://12187371840")
 			Always.TextSize = Library.FontSize
 			Always.TextStrokeTransparency = 0
 			
@@ -3178,7 +3136,7 @@ Library.Sections.__index = Library.Sections;
 			TextLabel.BorderColor3 = Color3.new(0,0,0)
 			TextLabel.Text = Colorpicker.Name
 			TextLabel.TextColor3 = Color3.fromRGB(145, 145, 145)
-			TextLabel.Font = Enum.Font.Code
+			TextLabel.FontFace = Font.new("rbxassetid://12187371840")
 			TextLabel.TextSize = Library.FontSize
 			TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 			TextLabel.TextStrokeTransparency = 0
@@ -3289,7 +3247,7 @@ Library.Sections.__index = Library.Sections;
 			Value.BorderSizePixel = 0
 			Value.BorderColor3 = Color3.new(0,0,0)
 			Value.TextColor3 = Color3.fromRGB(145,145,145)
-			Value.Font = Enum.Font.Code
+			Value.FontFace = Font.new("rbxassetid://12187371840")
 			Value.TextSize = Library.FontSize
 			Value.TextXAlignment = Enum.TextXAlignment.Left
 			Value.TextStrokeTransparency = 0
@@ -3305,7 +3263,7 @@ Library.Sections.__index = Library.Sections;
 			Title.BorderSizePixel = 0
 			Title.BorderColor3 = Color3.new(0,0,0)
 			Title.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-			Title.Font = Enum.Font.Code
+			Title.FontFace = Font.new("rbxassetid://12187371840")
 			Title.TextSize = Library.FontSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 			Title.TextStrokeTransparency = 0
@@ -3369,7 +3327,7 @@ Library.Sections.__index = Library.Sections;
 			NewButton.Text = ""
 			NewButton.TextColor3 = Color3.new(0,0,0)
 			NewButton.AutoButtonColor = false
-			NewButton.Font = Enum.Font.Code
+			NewButton.FontFace = Font.new("rbxassetid://12187371840")
 			NewButton.TextSize = 14
 			--
 			Outline.Name = "Outline"
@@ -3393,7 +3351,7 @@ Library.Sections.__index = Library.Sections;
 			Value.BorderSizePixel = 0
 			Value.BorderColor3 = Color3.new(0,0,0)
 			Value.TextColor3 = Color3.new(0.5686,0.5686,0.5686)
-			Value.Font = Enum.Font.Code
+			Value.FontFace = Font.new("rbxassetid://12187371840")
 			Value.TextSize = Library.FontSize
 			Value.Text = Button.Name
 			Value.TextStrokeTransparency = 0
@@ -3435,7 +3393,7 @@ Library.Sections.__index = Library.Sections;
 			NewButton.BorderColor3 = Color3.new(0,0,0)
 			NewButton.Text = Label.Name
 			NewButton.TextColor3 = Color3.fromRGB(255,255,255)
-			NewButton.Font = Enum.Font.Code
+			NewButton.FontFace = Font.new("rbxassetid://12187371840")
 			NewButton.TextSize = Library.FontSize
 			NewButton.TextXAlignment = Label.Centered and Enum.TextXAlignment.Center or Enum.TextXAlignment.Left
 			NewButton.TextStrokeTransparency = 0
