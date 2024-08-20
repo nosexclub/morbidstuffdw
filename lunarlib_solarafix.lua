@@ -195,6 +195,7 @@ local Library = {
 	ScreenGUI = nil;
 }
 
+local Players = game:GetService("Players")
 local InputService = game:GetService("UserInputService");
 local RunService = game:GetService("RunService");
 local HttpService = game:GetService("HttpService");
